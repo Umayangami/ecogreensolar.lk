@@ -1,0 +1,680 @@
+<%- include('partials/header', { 
+    title: 'ECO GREEN ENERGY SOLUTION (PVT) LTD - Home',
+    extraStyles: ['css/swiper.css']
+}) %>
+<div class="no-bottom no-top" id="content">
+
+            <div id="top"></div>
+
+          <section class="section-dark no-top no-bottom text-light relative v-center" style="overflow: hidden; min-height: 100vh;">
+    
+    <!-- Custom JS Background Slider -->
+    <div id="customBgSlider" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background-color: #000;">
+        <!-- Image 1 (Meka mulinma penawa - opacity: 1) -->
+        <img src="/images/banner/image1.jpg" class="slider-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: opacity 1s ease-in-out;" alt="Solar 1">
+        
+        <!-- Image 2 (Meka hangila thiyenne - opacity: 0) -->
+        <img src="/images/banner/image2.jpg" class="slider-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;" alt="Solar 2">
+        
+        <!-- Image 3 (Meka hangila thiyenne - opacity: 0) -->
+        <img src="/images/banner/image3.jpg" class="slider-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;" alt="Solar 3">
+    </div>
+
+    <!-- Podi JS Kalla Slider eka run karanna -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('#customBgSlider .slider-img');
+            let currentIndex = 0;
+
+            if(images.length > 0) {
+                setInterval(() => {
+                    // Dan penna thiyena image eka fade out karanawa
+                    images[currentIndex].style.opacity = '0';
+                    
+                    // Ilaga image ekata yanawa (3ta passe aith 1ta enawa)
+                    currentIndex = (currentIndex + 1) % images.length;
+                    
+                    // Aluth image eka fade in karanawa
+                    images[currentIndex].style.opacity = '1';
+                }, 4000); // 4000 = Thathpara 4n 4ta maru wenawa
+            }
+        });
+    </script>
+
+    <!-- Overlays -->
+    <div class="gradient-edge-top" style="position: relative; z-index: 1;"></div>
+    <div class="gradient-edge-bottom h-50" style="position: relative; z-index: 1;"></div>
+    <div class="sw-overlay op-6" style="position: relative; z-index: 1;"></div>
+    
+    <!-- Content (Text eka) -->
+    <div class="abs w-80 bottom-10 z-2 w-100" style="position: absolute; z-index: 2;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-start">
+                        <div class="col-lg-5">
+                            <p class="wow fadeInUp">Sri Lanka's most effective renewable energy service provider.</p>
+                        </div>
+                        <h1 class="fs-150 text-uppercase fs-sm-10vw mb-4 lh-1 wow fadeInUp" data-wow-delay=".2s">Green planet</h1>
+
+                        <div class="d-flex align-items-center wow fadeInUp" data-wow-delay=".4s">
+                            <a class="btn-main me-5" href="/get-a-quote">Get Started Now</a>
+                            
+                            <div class="fw-600 fs-14 lh-1-5 wow fadeInRight" data-wow-delay="1s">
+                                <span class="fs-16 fw-bold "></span><br>HAPPY CUSTOMERS
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h5 class="wow fadeInRight">About Us</h5>
+                        </div>
+                        <div class="col-lg-9">
+                            <h3 class="wow fadeInRight" data-wow-delay=".2s">Sri Lanka's most effective renewable energy service provider and the country's leader in solar
+                                systems.  <span class="op-3">Championing a greener planet by providing customized solutions for residential, commercial and industrial segments.</span></h3>
+            
+                            <div class="spacer-single"></div>
+            
+                            <div class="row g-4 gx-5">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="de_count lh-1-6 wow fadeInRight" data-wow-delay=".2s">
+                                        <h3 class="fs-40 mb-0"><span class="timer" data-to="96" data-speed="3000">96</span>+</h3>
+                                        Completed Projects
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="de_count lh-1-6 wow fadeInRight" data-wow-delay=".4s">
+                                        <h3 class="fs-40 mb-0"><span class="timer" data-to="1" data-speed="3000">10</span>MW+</h3>
+                                        Megawatt Solar Plants
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="de_count lh-1-6 wow fadeInRight" data-wow-delay=".6s">
+                                        <h3 class="fs-40 mb-0"><span class="timer" data-to="11" data-speed="3000">11</span>+</h3>
+                                        Years of Solar Expertise
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="border-top">
+                <div class="container">
+                    <div class="row gy-4 gx-5 align-items-center">
+                        <div class="col-lg-6">
+                            <div class="relative">
+                                <div class="relative overflow-hidden z-2 mb-5 rounded-1 mb-4 w-60 soft-shadow wow zoomIn"><img src="images/misc/p1.webp" class="w-100 wow scaleIn" data-wow-duration="1s" alt=""></div>
+                                         
+                                <div class="abs overflow-hidden top-0 end-0 mt-5 rounded-1 mb-4 w-60 wow zoomIn" data-wow-delay=".2s"><img src="images/misc/p2.webp" class="w-100 wow scaleIn" data-wow-duration="1s" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="subtitle id-color wow fadeInUp" data-wow-delay=".0s">World-Class Renewable Energy Solutions</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s">Champion a Greener Planet with <span class="op-3">Eco Green Energy Solutions</span></h2>
+                            <p class="wow fadeInUp" data-wow-delay=".4s">Established in 2015, we serve Sri Lanka's emerging solar market with customized solutions for residential, commercial, and industrial segments. We ensure customer satisfaction through creditable technical skills, proven world-class products, and cost-effective methodologies.</p>
+                        
+                            <div class="border-bottom mb-4"></div>
+                        
+                            <ul class="ul-check fw-600 mb-4 wow fadeInUp" data-wow-delay=".6s">
+                                <li>Minimize bank loan hassles by preparing loan proposals and working with banks.</li>
+                                <li>Offset carbon emissions and help communities become champions on key issues of climate change.</li>
+                                <li>Receive education and assistance to identify the best suited solution for you.</li>
+                                <li>Access proven world-class products, including Jinko PV modules, JA Solar, and GoodWe inverters.</li>
+                            </ul>
+                        
+                            <a class="btn-main fx-slide wow fadeInUp" data-wow-delay=".9s" href="/get-a-quote"><span>Get a Quote</span></a>
+                        
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </section>
+
+           <section class="section-dark p-0" aria-label="section">
+                <div class="bg-color text-dark d-flex py-4 lh-1">
+                    <div class="de-marquee-list-2 wow fadeIn">
+                        <span class="fs-40 fw-600 mx-3">Solar System Installation</span>
+                        <span class="fs-40 fw-600 mx-3"><img src="images/logo-icon-dark.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3">Solar Power Storage</span>
+                        <span class="fs-40 fw-600 mx-3"><img src="images/logo-icon-dark.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3">Engineering Services</span>
+                        <span class="fs-40 fw-600 mx-3"><img src="images/logo-icon-dark.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3">Solar Financing Assistance</span>
+                        <span class="fs-40 fw-600 mx-3"><img src="images/logo-icon-dark.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3">Feasibility Reports</span>
+                        <span class="fs-40 fw-600 mx-3"><img src="images/logo-icon-dark.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3">Hot Water Systems</span>
+                        <span class="fs-40 fw-600 mx-3"><img src="images/logo-icon-dark.webp" class="w-40px" alt=""></span>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="bg-light">
+                <div class="container">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-6 text-center">
+                            <div class="subtitle wow fadeInUp mb-3">Eco Green Energy Services</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s">World-Class <span class="op-3">Renewable Energy Solutions</span></h2>
+                            <p class="lead mb-0 wow fadeInUp">Serving Sri Lanka's emerging solar market with world-class renewable energy solutions for residential, commercial and industrial applications.</p>
+                            <div class="spacer-single"></div>
+                            <div class="spacer-half"></div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="hover">
+                                <div class="relative overflow-hidden">
+                                    <a href="/services" class="d-block hover">
+                                        <div class="relative overflow-hidden rounded-1">
+                                            <img src="images/services/1.webp" class="w-100 hover-scale-1-2" alt="Installation">
+                                        </div>
+                                    </a>
+                                    <div class="p-30 relative bg-white rounded-1 mx-4 mt-min-100">
+                                        <div class="abs top-0 end-0 mt-min-30 me-4 circle bg-color w-60px h-60px">
+                                            <a href="/projects">
+                                                <img src="images/misc/up-right-arrow.webp" class="w-60px p-20" alt="Arrow">
+                                            </a>
+                                        </div>
+                                        <h4>Solar Systems Installation</h4>
+                                        <p class="mb-0">Professional installation of residential, commercial, and industrial solar power systems.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="hover">
+                                <div class="relative overflow-hidden">
+                                    <a href="/services" class="d-block hover">
+                                        <div class="relative overflow-hidden rounded-1">
+                                            <img src="images/services/2.webp" class="w-100 hover-scale-1-2" alt="Feasibility Reports">
+                                        </div>
+                                    </a>
+                                    <div class="p-30 relative bg-white rounded-1 mx-4 mt-min-100">
+                                        <div class="abs top-0 end-0 mt-min-30 me-4 circle bg-color w-60px h-60px">
+                                            <a href="/projects">
+                                                <img src="images/misc/up-right-arrow.webp" class="w-60px p-20" alt="Arrow">
+                                            </a>
+                                        </div>
+                                        <h4>Feasibility Reports</h4>
+                                        <p class="mb-0">Preparation of detailed solar power feasibility reports for medium to large-scale projects.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="hover">
+                                <div class="relative overflow-hidden">
+                                    <a href="/services" class="d-block hover">
+                                        <div class="relative overflow-hidden rounded-1">
+                                            <img src="images/services/3.webp" class="w-100 hover-scale-1-2" alt="Engineering Services">
+                                        </div>
+                                    </a>
+                                    <div class="p-30 relative bg-white rounded-1 mx-4 mt-min-100">
+                                        <div class="abs top-0 end-0 mt-min-30 me-4 circle bg-color w-60px h-60px">
+                                            <a href="/projects">
+                                                <img src="images/misc/up-right-arrow.webp" class="w-60px p-20" alt="Arrow">
+                                            </a>
+                                        </div>
+                                        <h4>Engineering Services</h4>
+                                        <p class="mb-0">Expert engineering services, support, and education for existing solar power systems.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <a class="btn-main fx-slide" href="/services"><span>View All Services</span></a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section class="bg-dark text-light">
+                <div class="container relative z-1">
+                    <div class="row g-4 gx-5 align-items-center">
+            
+                        <div class="col-lg-6">
+                            <div class="relative">
+                                <div class="bg-blur text-light text-center rounded-1 abs w-200px p-4 m-4 bottom-0 z-3 overflow-hidden wow zoomIn">
+                                    <h2 class="mb-0">325%</h2>
+                                    <p class="lh-1-5">Average increase in solar panel</p>
+                                </div>
+                                <div class="rounded-1 w-90 overflow-hidden wow zoomIn">
+                                    <img src="images/misc/s4.webp" class="w-100 wow scaleIn" alt="">
+                                </div>
+                                
+                            </div>
+                        </div>
+            
+                        <div class="col-lg-6">
+                            <div class="subtitle id-color wow fadeInUp">Trusted &amp; Affordable</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s">Why Choose Us?</h2>
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="h-100 rounded-1">
+                                        <div class="relative wow fadeInUp" data-wow-delay=".0s">
+                                            <h4>Professional Service</h4>
+                                            <p class="mb-0">We deliver all services professionally utilizing creditable technical skills and cost-effective methodologies.</p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-6">
+                                    <div class="h-100 rounded-1">
+                                        <div class="relative wow fadeInUp" data-wow-delay=".2s">
+                                            <h4>Customized Solutions</h4>
+                                            <p class="mb-0">Providing the entire island with customized solutions for residential, commercial, or industrial customer segments.</p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-6">
+                                    <div class="h-100 rounded-1">
+                                        <div class="relative wow fadeInUp" data-wow-delay=".4s">
+                                            <h4>Hassle-Free Financing</h4>
+                                            <p class="mb-0">We minimize bank loan hassles by preparing loan proposals and working directly with banks for you.</p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-6">
+                                    <div class="h-100 rounded-1">
+                                        <div class="relative wow fadeInUp" data-wow-delay=".6s">
+                                            <h4>Customer Education &amp; Support</h4>
+                                            <p class="mb-0">We provide superior support and educate customers on technology, financial benefits, and product quality.</p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-6">
+                                    <div class="h-100 rounded-1">
+                                        <div class="relative wow fadeInUp" data-wow-delay=".8s">
+                                            <h4>World-Class Products</h4>
+                                            <p class="mb-0">We provide proven world-class solar products at affordable and highly competitive prices.</p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-lg-6">
+                                    <div class="h-100 rounded-1">
+                                        <div class="relative wow fadeInUp" data-wow-delay="1s">
+                                            <h4>Prompt Delivery</h4>
+                                            <p class="mb-0">Ensuring customer satisfaction through best business practices and sustainable partnerships for prompt delivery.</p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            
+                <div class="spacer-double"></div>
+            
+            </section>
+
+
+
+
+
+            <section>
+                <div class="container">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-6 text-center">
+                            <div class="subtitle wow fadeInUp mb-3">Our Solar Projects</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s">Powering a Brighter Future <span class="op-3">with Clean Energy</span></h2>
+                            <p class="lead mb-0 wow fadeInUp">Explore our latest solar installations—from residential rooftops to commercial systems—each designed for maximum efficiency and sustainability.</p>
+                            <div class="spacer-single"></div>
+                            <div class="spacer-half"></div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-12 wow fadeInUp">
+                            <div class="overflow-hidden rounded-1">
+                                <div class="relative wow fadeIn">
+                                    <div class="owl-custom-nav menu-float" data-target="#project-single-carousel">
+                                        <a class="btn-next"></a>
+                                        <a class="btn-prev"></a>                                
+
+                                        <div id="project-single-carousel" class="owl-3-cols owl-carousel owl-theme">
+                                            <div class="item">
+                                                <a href="/projects">
+                                                    <div class="hover rounded-1 relative overflow-hidden text-light">
+                                                        <div class="abs p-40 top-0 z-3">
+                                                            <img src="images/misc/up-right-arrow-white.webp" class="w-10 mb-3 wow scaleIn" alt="">
+                                                        </div>
+                                                        <div class="abs p-40 bottom-0 z-3">                            
+                                                            <h3>Mr. Nazloon Mohomed</h3>
+                                                            <p class="mb-0 hover-mh-60">10kW - Colombo 04</p>
+                                                        </div>
+                                                        <div class="hover-op-05 bg-dark abs w-100 h-100 top-0 start-0 z-2"></div>
+                                                        <img src="images/projects/1.webp" class="w-100 hover-scale-1-2" alt="">
+                                                        <div class="gradient-edge-bottom h-50"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="item">
+                                                <a href="/projects">
+                                                    <div class="hover rounded-1 relative overflow-hidden text-light">
+                                                        <div class="abs p-40 top-0 z-3">
+                                                            <img src="images/misc/up-right-arrow-white.webp" class="w-10 mb-3 wow scaleIn" alt="">
+                                                        </div>
+                                                        <div class="abs p-40 bottom-0 z-3">                            
+                                                            <h3>Mr. Maulavi Mohomed</h3>
+                                                            <p class="mb-0 hover-mh-60">25kW - Colombo 10</p>
+                                                        </div>
+                                                        <div class="hover-op-05 bg-dark abs w-100 h-100 top-0 start-0 z-2"></div>
+                                                        <img src="images/projects/2.webp" class="w-100 hover-scale-1-2" alt="">
+                                                        <div class="gradient-edge-bottom h-50"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="item">
+                                                <a href="/projects">
+                                                    <div class="hover rounded-1 relative overflow-hidden text-light">
+                                                        <div class="abs p-40 top-0 z-3">
+                                                            <img src="images/misc/up-right-arrow-white.webp" class="w-10 mb-3 wow scaleIn" alt="">
+                                                        </div>
+                                                        <div class="abs p-40 bottom-0 z-3">                            
+                                                            <h3>Lanka Filling Station</h3>
+                                                            <p class="mb-0 hover-mh-60">5kW - Horana</p>
+                                                        </div>
+                                                        <div class="hover-op-05 bg-dark abs w-100 h-100 top-0 start-0 z-2"></div>
+                                                        <img src="images/projects/3.webp" class="w-100 hover-scale-1-2" alt="">
+                                                        <div class="gradient-edge-bottom h-50"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="item">
+                                                <a href="/projects">
+                                                    <div class="hover rounded-1 relative overflow-hidden text-light">
+                                                        <div class="abs p-40 top-0 z-3">
+                                                            <img src="images/misc/up-right-arrow-white.webp" class="w-10 mb-3 wow scaleIn" alt="">
+                                                        </div>
+                                                        <div class="abs p-40 bottom-0 z-3">                            
+                                                            <h3>Mr. SL H Harsha Mohanlal</h3>
+                                                            <p class="mb-0 hover-mh-60">3kW - Chillaw</p>
+                                                        </div>
+                                                        <div class="hover-op-05 bg-dark abs w-100 h-100 top-0 start-0 z-2"></div>
+                                                        <img src="images/projects/4.webp" class="w-100 hover-scale-1-2" alt="">
+                                                        <div class="gradient-edge-bottom h-50"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="item">
+                                                <a href="/projects">
+                                                    <div class="hover rounded-1 relative overflow-hidden text-light">
+                                                        <div class="abs p-40 top-0 z-3">
+                                                            <img src="images/misc/up-right-arrow-white.webp" class="w-10 mb-3 wow scaleIn" alt="">
+                                                        </div>
+                                                        <div class="abs p-40 bottom-0 z-3">                            
+                                                            <h3>GSC Thalis</h3>
+                                                            <p class="mb-0 hover-mh-60">40kW - Hambanthota</p>
+                                                        </div>
+                                                        <div class="hover-op-05 bg-dark abs w-100 h-100 top-0 start-0 z-2"></div>
+                                                        <img src="images/projects/5.webp" class="w-100 hover-scale-1-2" alt="">
+                                                        <div class="gradient-edge-bottom h-50"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="item">
+                                                <a href="/projects">
+                                                    <div class="hover rounded-1 relative overflow-hidden text-light">
+                                                        <div class="abs p-40 top-0 z-3">
+                                                            <img src="images/misc/up-right-arrow-white.webp" class="w-10 mb-3 wow scaleIn" alt="">
+                                                        </div>
+                                                        <div class="abs p-40 bottom-0 z-3">                            
+                                                            <h3>D Liyanagunawardhana</h3>
+                                                            <p class="mb-0 hover-mh-60">35kW - Yakkala</p>
+                                                        </div>
+                                                        <div class="hover-op-05 bg-dark abs w-100 h-100 top-0 start-0 z-2"></div>
+                                                        <img src="images/projects/6.webp" class="w-100 hover-scale-1-2" alt="">
+                                                        <div class="gradient-edge-bottom h-50"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section class="bg-color no-top no-bottom overflow-hidden">
+                <div class="container-fluid relative half-fluid">
+                  <div class="container">
+                    <div class="row">
+                      <!-- Image -->
+                      <div class="col-lg-6 position-lg-absolute left-half h-100">
+                        <div class="image wow fadeInLeft" data-bgimage="url(images/misc/s2.webp) center"></div>
+                      </div>
+                      <!-- Text -->
+                      <div class="col-lg-5 offset-lg-7">
+                        <div class="me-lg-3">
+                          <div class="py-5 my-5">
+                            <div class="owl-single-dots owl-carousel owl-theme">
+                              
+                              <div class="item">
+                                <i class="icofont-quote-left text-dark fs-40 d-block mb-4 wow fadeInUp"></i>
+                                <h3 class="mb-4 wow fadeInUp">
+                                  Eco Green Energy Solutions made our transition to solar completely hassle-free. They even helped with the bank loan process for our 5kW system. Highly recommend their professional service!
+                                </h3>
+                                <span class="wow fadeInUp">Mr. Virajith Karunarathne (Lanka Filling Station, Horana)</span>
+                              </div>
+
+                              <div class="item">
+                                <i class="icofont-quote-left text-dark fs-40 d-block mb-4 wow fadeInUp"></i>
+                                <h3 class="mb-4 wow fadeInUp">
+                                  Installing a 40kW system was a major project, but the EGES engineering team handled it expertly using high-quality panels and inverters. A truly world-class service.
+                                </h3>
+                                <span class="wow fadeInUp">GSC Thalis (Samodayaramaya, Hambanthota)</span>
+                              </div>
+
+                              <div class="item">
+                                <i class="icofont-quote-left text-dark fs-40 d-block mb-4 wow fadeInUp"></i>
+                                <h3 class="mb-4 wow fadeInUp">
+                                  We are extremely satisfied with our 25kW solar installation. EGES provided a cost-effective solution and premium quality products that give us great peace of mind.
+                                </h3>
+                                <span class="wow fadeInUp">Mr. G.W. Kodithuwakku (Homagama)</span>
+                              </div>
+
+                              <div class="item">
+                                <i class="icofont-quote-left text-dark fs-40 d-block mb-4 wow fadeInUp"></i>
+                                <h3 class="mb-4 wow fadeInUp">
+                                  The team at EGES educated us perfectly on what we needed. From the initial survey to the final net metering of our residential system, the entire process was seamless and affordable.
+                                </h3>
+                                <span class="wow fadeInUp">Ms. Tharushi Liyanagunawardana (Yakkala)</span>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </section>
+                         
+                                              
+      
+
+
+
+
+            <section class="p-0" aria-label="section">
+                <div class="bg-dark d-flex py-4 lh-1">
+                    <div class="de-marquee-list-2 wow fadeIn">
+                        <span class="fs-40 fw-600 mx-3 id-color">Solar System Installation</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3 id-color">Solar Battery Storage</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3 id-color">Engineering Services</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3 id-color">Feasibility Reports</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3 id-color">Hot Water Systems</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3 id-color">Solar Inverters</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                        <span class="fs-40 fw-600 mx-3 id-color">Solar PV Modules</span>
+                        <span class="fs-40 mx-3"><img src="images/logo-icon.webp" class="w-40px" alt=""></span>
+                    </div>
+                </div>
+            </section>
+
+        
+
+            <section>
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-5">
+                            <div class="subtitle id-color wow fadeInUp" data-wow-delay=".0s">Everything You Need to Know</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s">Frequently Asked Questions</h2>
+                        </div>
+            
+                        <div class="col-lg-7">
+                            <div class="accordion s2 wow fadeInUp">
+                                <div class="accordion-section">
+                                    <div class="accordion-section-title" data-tab="#accordion-a1">
+                                        What types of products and services does EGES offer?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a1">
+                                        We provide Solar Photovoltaic (PV) system products and services for residential, commercial, and industrial segments, as well as specially designed stainless steel hot water systems[cite: 1]. We also offer installation, feasibility reports, and engineering services[cite: 1].
+                                    </div>
+                                    
+                                    <div class="accordion-section-title" data-tab="#accordion-a2">
+                                        Which solar panel and inverter brands do you use?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a2">
+                                        We partner with world-renowned renewable energy brands to provide the highest quality[cite: 1]. Our main products include premium Jinko and JA PV modules, as well as GoodWe inverters[cite: 1].
+                                    </div>                                        
+                                    
+                                    <div class="accordion-section-title" data-tab="#accordion-a3">
+                                        Why should I choose EGES over lower-priced competitors?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a3">
+                                        While some vendors offer lower prices (around Rs 135,000/kW) often with substandard quality, we price our systems highly competitively at Rs 137,000/kW[cite: 1]. We do this to ensure you receive proven, world-class products that maintain consistent quality and performance[cite: 1].
+                                    </div>
+                                    
+                                    <div class="accordion-section-title" data-tab="#accordion-a4">
+                                        Is EGES a registered and certified solar provider?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a4">
+                                        Yes, Eco Green Energy Solutions Pvt Ltd was established in 2015 and has been proudly registered under the Sustainable Energy Authority of Sri Lanka since 2016[cite: 1].
+                                    </div>
+                                    
+                                    <div class="accordion-section-title" data-tab="#accordion-a5">
+                                        Do you provide assistance with financing or bank loans?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a5">
+                                        Yes, we minimize bank loan hassles for our customers by preparing complete loan proposals and working directly with banks to help you finance your solar system[cite: 1].
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </section>
+                           
+
+
+
+
+            
+            <section aria-label="section" class="p-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- <div class="col-lg-12">
+                            <a class="d-block hover popup-youtube" href="https://www.youtube.com/watch?v=C6rf51uHWJg">
+                                <div class="relative overflow-hidden">
+                                    <div class="absolute start-0 w-100 abs-middle fs-36 text-white text-center z-2">
+                                        <div class="player circle wow scaleIn"><span></span></div>
+                                    </div> 
+                                    <div class="absolute w-100 h-100 top-0 bg-dark hover-op-05"></div>
+                                    <img src="images/background/w1.webp" class="w-100 hover-scale-1-1" alt="Eco Green Energy Solutions">
+                                </div>
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-color py-5 pb-4">
+                <div class="container relative z-1">
+                    <div class="row g-4 grid-divider sm-hide">
+                        <div class="col-lg-4 col-md-6 mb-sm-30 wow fadeIn fadeInRight" data-wow-delay=".2s">
+                            <div class="d-flex justify-content-center">
+                                <i class="fs-60 text-dark icon_phone"></i>
+                                <div class="ms-3">
+                                    <h4 class="mb-0">Need Our Services?</h4>
+                                    <p class="text-dark">Call: +94 11 234 5678</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-sm-30 wow fadeIn fadeInRight" data-wow-delay=".4s">
+                            <div class="d-flex justify-content-center">
+                                <i class="fs-60 text-dark icon_pin"></i>
+                                <div class="ms-3">
+                                    <h4 class="mb-0">Our Location</h4>
+                                    <p class="text-dark">#394B, High Level Road, Pannipitiya</p>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="col-lg-4 col-md-6 mb-sm-30 wow fadeIn fadeInRight" data-wow-delay=".6s">
+                            <div class="d-flex justify-content-center">
+                                <i class="fs-60 text-dark icon_mail"></i>
+                                <div class="ms-3">
+                                    <h4 class="mb-0">Email Us</h4>
+                                    <p class="text-dark">info@ecogreensolar.lk</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+                            
+        </div>
+        <!-- content end -->
+
+        <!-- footer begin -->
+        
+<%- include('partials/footer', { 
+    extraScripts: ['js/swiper.js', 'js/custom-swiper-1.js', 'js/custom-marquee.js']
+}) %>

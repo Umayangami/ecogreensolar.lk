@@ -1,0 +1,646 @@
+/* =====================================================
+   Solar Savings Calculator — solar-calculator.css
+   Matches the Eco Green Energy Solutions design system.
+   Uses CSS variables defined in style.css + scheme-1.css
+   ===================================================== */
+
+/* ----- Two-column grid layout ----- */
+.calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (max-width: 991px) {
+    .calc-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ----- Card shell ----- */
+.calc-card {
+    background: #ffffff;
+    border-radius: var(--rounded-1);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ----- Card header strip ----- */
+.calc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-dark-1);
+    padding: 24px 32px;
+}
+
+.calc-icon-wrap {
+    width: 52px;
+    height: 52px;
+    background: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 26px;
+    color: var(--bg-dark-1);
+}
+
+.calc-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary-color);
+    margin-bottom: 2px;
+}
+
+.calc-card-title {
+    font-family: var(--heading-font);
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+/* ----- Form body ----- */
+.calc-form-body {
+    padding: 32px;
+}
+
+/* ----- Field groups ----- */
+.calc-field-group {
+    margin-bottom: 24px;
+}
+
+.calc-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--heading-font);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading-font-color);
+    margin-bottom: 8px;
+    letter-spacing: 0;
+}
+
+/* ----- Tooltip ----- */
+.calc-tooltip-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--border-color);
+    font-size: 15px;
+}
+
+.calc-tooltip-wrap:hover .calc-tooltip-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.calc-tooltip-text {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--bg-dark-1);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    max-width: 220px;
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ----- Number input with prefix ----- */
+.calc-input-prefix {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #dde2ea;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+}
+
+.calc-input-prefix:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(251, 236, 107, 0.25);
+}
+
+.calc-prefix-text {
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bg-dark-1);
+    background: #f5f6f8;
+    border-right: 1.5px solid #dde2ea;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+}
+
+.calc-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0 16px;
+    height: 48px;
+    font-size: 16px;
+    font-family: var(--body-font);
+    color: var(--heading-font-color);
+    background: transparent;
+    -moz-appearance: textfield;
+}
+
+.calc-input::-webkit-outer-spin-button,
+.calc-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.calc-input.input-error {
+    background: #fff5f5;
+}
+
+.calc-input-prefix.input-error {
+    border-color: #e53e3e;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+}
+
+/* ----- Select wrapper ----- */
+.calc-select-wrap {
+    position: relative;
+}
+
+.calc-select {
+    width: 100%;
+    height: 48px;
+    padding: 0 44px 0 16px;
+    border: 1.5px solid #dde2ea;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: var(--body-font);
+    color: var(--heading-font-color);
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.calc-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(251, 236, 107, 0.25);
+}
+
+.calc-select.input-error {
+    border-color: #e53e3e;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+}
+
+.calc-select-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--body-font-color);
+    font-size: 12px;
+}
+
+/* ----- Hint text ----- */
+.calc-hint {
+    font-size: 12px;
+    color: var(--body-font-color);
+    margin-top: 6px;
+    margin-bottom: 0;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+/* ----- Error message ----- */
+.calc-error-msg {
+    display: none;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-left: 4px solid #e53e3e;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #c53030;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.calc-error-msg.visible {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ----- CTA Button (full-width variant) ----- */
+.calc-btn-full {
+    width: 100%;
+    text-align: center;
+    padding: 14px 24px;
+    font-size: 16px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    background: var(--bg-dark-1);
+    color: var(--primary-color);
+    font-family: var(--body-font);
+    letter-spacing: 0.02em;
+    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 14px rgba(22, 53, 99, 0.25);
+}
+
+.calc-btn-full:hover {
+    background: var(--bg-dark-2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(22, 53, 99, 0.35);
+    color: var(--primary-color);
+}
+
+.calc-btn-full:active {
+    transform: translateY(0);
+}
+
+/* ----- Disclaimer text ----- */
+.calc-disclaimer {
+    font-size: 11.5px;
+    color: var(--body-font-color);
+    opacity: 0.65;
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* ================================================
+   RIGHT COLUMN — Empty & Results States
+   ================================================ */
+
+/* ----- Empty state ----- */
+.calc-empty-state {
+    padding: 40px 32px;
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.calc-empty-icon {
+    width: 80px;
+    height: 80px;
+    background: #f5f6f8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: var(--border-color);
+    margin: 0 auto 20px;
+}
+
+.calc-empty-state h4 {
+    font-family: var(--heading-font);
+    font-size: 20px;
+    color: var(--heading-font-color);
+    margin-bottom: 10px;
+}
+
+.calc-empty-state p {
+    font-size: 14px;
+    color: var(--body-font-color);
+    max-width: 280px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+}
+
+.calc-empty-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px 24px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.calc-empty-bullet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--heading-font-color);
+}
+
+.calc-empty-bullet i {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* ----- Results state (hidden initially) ----- */
+.calc-results-state {
+    display: none;
+    padding: 28px 32px 32px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.calc-results-state.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Use animation class for smooth reveal */
+.calc-results-state.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ----- Results header strip ----- */
+.calc-results-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.calc-results-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--bg-dark-1);
+    flex-shrink: 0;
+}
+
+/* ----- Stats 2x2 grid ----- */
+.calc-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.calc-stat-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.calc-stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.calc-stat-card.calc-stat-primary {
+    background: var(--bg-dark-1);
+    border-color: transparent;
+}
+
+.calc-stat-card.calc-stat-primary .calc-stat-label,
+.calc-stat-card.calc-stat-primary .calc-stat-value,
+.calc-stat-card.calc-stat-primary .calc-stat-sub {
+    color: rgba(255,255,255,0.9);
+}
+
+.calc-stat-card.calc-stat-primary .calc-stat-value {
+    color: var(--primary-color);
+}
+
+.calc-stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--body-font-color);
+    margin-bottom: 4px;
+    opacity: 0.8;
+}
+
+.calc-stat-value {
+    font-family: var(--heading-font);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--heading-font-color);
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.calc-stat-sub {
+    font-size: 11px;
+    color: var(--body-font-color);
+    margin-bottom: 0;
+    opacity: 0.75;
+}
+
+/* ----- Savings bar ----- */
+.calc-savings-bar-wrap {
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.calc-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--body-font-color);
+    margin-bottom: 8px;
+}
+
+.calc-bar-track {
+    width: 100%;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.calc-bar-fill {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 999px;
+    width: 0%;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.calc-bar-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--heading-font-color);
+}
+
+/* ----- Annual savings highlight ----- */
+.calc-annual-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-dark-1);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 8px;
+}
+
+.calc-annual-value {
+    font-family: var(--heading-font);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.calc-annual-box .calc-stat-label {
+    color: rgba(255,255,255,0.7);
+}
+
+.calc-annual-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(251, 236, 107, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--primary-color);
+}
+
+/* ----- Reset button ----- */
+.calc-reset-btn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    background: none;
+    border: 1.5px solid #dde2ea;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--body-font-color);
+    cursor: pointer;
+    font-family: var(--body-font);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    text-align: center;
+}
+
+.calc-reset-btn:hover {
+    border-color: var(--bg-dark-1);
+    color: var(--bg-dark-1);
+    background: #f8f9fa;
+}
+
+/* ================================================
+   Trust Strip
+   ================================================ */
+.calc-trust-strip {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.calc-trust-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 0 32px;
+    font-size: 14px;
+    color: var(--body-font-color);
+}
+
+.calc-trust-item strong {
+    display: block;
+    font-size: 15px;
+    color: var(--heading-font-color);
+    margin-bottom: 4px;
+}
+
+.calc-trust-divider {
+    width: 1px;
+    height: 80px;
+    background: #dde2ea;
+    align-self: center;
+}
+
+@media (max-width: 767px) {
+    .calc-trust-divider { display: none; }
+    .calc-trust-item { padding: 16px 0; text-align: center; }
+
+    .calc-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .calc-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-form-body {
+        padding: 24px 20px;
+    }
+
+    .calc-card-header {
+        padding: 20px 20px;
+    }
+
+    .calc-results-state {
+        padding: 20px 20px 24px;
+    }
+
+    .calc-empty-state {
+        padding: 32px 20px;
+    }
+
+    .calc-annual-value {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Admins – Eco Green Energy</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+    :root { --eco:#2e7d32; --eco-dark:#1b5e20; --eco-light:#e8f5e9; }
+    body { background:#f5f7f5; font-size:.9rem; }
+
+    .sidebar {
+      width:240px; min-height:100vh; background:var(--eco-dark);
+      position:fixed; top:0; left:0; display:flex; flex-direction:column; z-index:100;
+    }
+    .sidebar .brand { padding:1.4rem 1.2rem 1rem; border-bottom:1px solid rgba(255,255,255,.12); }
+    .sidebar .brand h5 { color:#fff; margin:0; font-weight:700; font-size:.95rem; line-height:1.4; }
+    .sidebar .brand small { color:#a5d6a7; font-size:.75rem; }
+    .sidebar .nav-link {
+      color:#c8e6c9; padding:.7rem 1.2rem; font-size:.88rem;
+      border-left:3px solid transparent; transition:all .18s;
+    }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active {
+      color:#fff; background:rgba(255,255,255,.08); border-left-color:#81c784;
+    }
+    .sidebar .nav-link .icon { margin-right:8px; }
+    .sidebar-footer { margin-top:auto; padding:1rem 1.2rem; border-top:1px solid rgba(255,255,255,.12); }
+
+    .main-content { margin-left:240px; }
+    .topbar {
+      background:#fff; border-bottom:1px solid #dee2e6;
+      padding:.75rem 1.5rem; display:flex; align-items:center;
+      justify-content:space-between; position:sticky; top:0; z-index:50;
+      box-shadow:0 1px 4px rgba(0,0,0,.06);
+    }
+    .topbar .page-title { font-weight:700; color:var(--eco-dark); font-size:1.05rem; }
+    .topbar .admin-badge {
+      background:var(--eco-light); color:var(--eco-dark);
+      padding:4px 12px; border-radius:20px; font-size:.8rem; font-weight:600;
+    }
+
+    .section-card { border:none; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.07); }
+    .section-card .card-header {
+      background:var(--eco); color:#fff; border-radius:10px 10px 0 0 !important;
+      font-weight:600; padding:.85rem 1.2rem;
+    }
+    .table thead th {
+      background:var(--eco-light); color:var(--eco-dark);
+      font-weight:600; font-size:.8rem; text-transform:uppercase;
+      letter-spacing:.4px; border-bottom:2px solid #c8e6c9; white-space:nowrap;
+    }
+    .table-hover tbody tr:hover { background:#f1f8f1; }
+    .table td { vertical-align:middle; }
+    .badge-superadmin { background:#1b5e20; color:#fff; padding:3px 10px; border-radius:20px; font-size:.75rem; }
+    .badge-admin { background:var(--eco-light); color:var(--eco-dark); padding:3px 10px; border-radius:20px; font-size:.75rem; }
+    .badge-you { background:#fff3e0; color:#e65100; padding:2px 8px; border-radius:20px; font-size:.7rem; margin-left:4px; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="brand">
+    <div style="font-size:1.6rem;margin-bottom:6px;">🌿</div>
+    <h5>Eco Green Energy<br/>Solution (Pvt) Ltd</h5>
+    <small>Admin Panel</small>
+  </div>
+  <nav class="mt-2">
+    <a href="/admin" class="nav-link"><span class="icon">📊</span> Dashboard</a>
+    <a href="/admin/register" class="nav-link"><span class="icon">➕</span> Register Admin</a>
+    <a href="/admin/manage-admins" class="nav-link active"><span class="icon">👥</span> Manage Admins</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div style="color:#a5d6a7;font-size:.78rem;margin-bottom:8px;">
+      Logged in as <strong style="color:#fff;"><%= adminUser %></strong>
+      <span class="badge ms-1" style="background:rgba(255,255,255,.15);font-size:.7rem;"><%= adminRole %></span>
+    </div>
+    <a href="/" class="btn btn-sm btn-outline-light w-100 mb-2" style="opacity:.75;">🌐 Back to Website</a>
+    <a href="/admin/logout" class="btn btn-sm btn-outline-light w-100">🚪 Logout</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+  <div class="topbar">
+    <span class="page-title">👥 Manage Admins</span>
+    <div class="d-flex align-items-center gap-2">
+      <a href="/admin/register" class="btn btn-sm" style="background:var(--eco);color:#fff;font-weight:600;">➕ Register New Admin</a>
+      <span class="admin-badge">👤 <%= adminUser %></span>
+    </div>
+  </div>
+
+  <div class="p-4">
+
+    <% if (error) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <% if (success) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success:</strong> <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <div class="card section-card">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <span>👥 All Admin Accounts</span>
+        <span class="badge bg-light text-dark"><%= admins.length %> total</span>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th style="width:50px;">#</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Registered At</th>
+                <th style="width:120px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (admins.length === 0) { %>
+                <tr><td colspan="5" class="text-center text-muted py-4">No admin accounts found.</td></tr>
+              <% } else { %>
+                <% admins.forEach(function(a, i) { %>
+                  <tr>
+                    <td class="text-muted"><%= i + 1 %></td>
+                    <td>
+                      <strong><%= a.username %></strong>
+                      <% if (a.username === adminUser) { %>
+                        <span class="badge-you">You</span>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% if (a.role === 'superadmin') { %>
+                        <span class="badge-superadmin">⭐ Superadmin</span>
+                      <% } else { %>
+                        <span class="badge-admin">Admin</span>
+                      <% } %>
+                    </td>
+                    <td class="text-muted" style="white-space:nowrap;">
+                      <%= a.created_at ? new Date(a.created_at).toLocaleString('en-GB', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—' %>
+                    </td>
+                    <td>
+                      <% if (a.username !== adminUser) { %>
+                        <!-- Delete button triggers confirm modal -->
+                        <button type="button"
+                          class="btn btn-sm btn-outline-danger"
+                          onclick="confirmDelete('<%= a.username %>', <%= a.id %>)">
+                          🗑 Delete
+                        </button>
+                      <% } else { %>
+                        <span class="text-muted" style="font-size:.78rem;">—</span>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }) %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /main-content -->
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:12px;border:none;box-shadow:0 8px 32px rgba(0,0,0,.2);">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-danger">⚠️ Delete Admin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete admin <strong id="deleteUsername"></strong>?</p>
+        <p class="text-muted" style="font-size:.85rem;">This action cannot be undone. The admin will lose all access immediately.</p>
+      </div>
+      <div class="modal-footer border-0 pt-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form id="deleteForm" action="/admin/manage-admins/delete" method="POST">
+          <input type="hidden" name="id" id="deleteIdInput" />
+          <button type="submit" class="btn btn-danger fw-semibold">Yes, Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function confirmDelete(username, id) {
+    document.getElementById('deleteUsername').textContent = username;
+    document.getElementById('deleteIdInput').value = id;
+    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+  }
+</script>
+</body>
+</html>

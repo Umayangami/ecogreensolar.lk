@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Admin – Eco Green Energy</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+    :root { --eco:#2e7d32; --eco-dark:#1b5e20; --eco-light:#e8f5e9; }
+    body { background:#f5f7f5; font-size:.9rem; }
+
+    .sidebar {
+      width:240px; min-height:100vh; background:var(--eco-dark);
+      position:fixed; top:0; left:0; display:flex; flex-direction:column; z-index:100;
+    }
+    .sidebar .brand { padding:1.4rem 1.2rem 1rem; border-bottom:1px solid rgba(255,255,255,.12); }
+    .sidebar .brand h5 { color:#fff; margin:0; font-weight:700; font-size:.95rem; line-height:1.4; }
+    .sidebar .brand small { color:#a5d6a7; font-size:.75rem; }
+    .sidebar .nav-link {
+      color:#c8e6c9; padding:.7rem 1.2rem; font-size:.88rem;
+      border-left:3px solid transparent; transition:all .18s;
+    }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active {
+      color:#fff; background:rgba(255,255,255,.08); border-left-color:#81c784;
+    }
+    .sidebar .nav-link .icon { margin-right:8px; }
+    .sidebar-footer { margin-top:auto; padding:1rem 1.2rem; border-top:1px solid rgba(255,255,255,.12); }
+
+    .main-content { margin-left:240px; }
+    .topbar {
+      background:#fff; border-bottom:1px solid #dee2e6;
+      padding:.75rem 1.5rem; display:flex; align-items:center;
+      justify-content:space-between; position:sticky; top:0; z-index:50;
+      box-shadow:0 1px 4px rgba(0,0,0,.06);
+    }
+    .topbar .page-title { font-weight:700; color:var(--eco-dark); font-size:1.05rem; }
+    .topbar .admin-badge {
+      background:var(--eco-light); color:var(--eco-dark);
+      padding:4px 12px; border-radius:20px; font-size:.8rem; font-weight:600;
+    }
+
+    .form-card { border:none; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08); }
+    .form-card .card-header {
+      background:var(--eco); color:#fff;
+      border-radius:12px 12px 0 0; font-weight:600; padding:.85rem 1.4rem;
+    }
+    .form-control:focus { border-color:var(--eco); box-shadow:0 0 0 .2rem rgba(46,125,50,.2); }
+    .form-select:focus { border-color:var(--eco); box-shadow:0 0 0 .2rem rgba(46,125,50,.2); }
+    .btn-register { background:var(--eco); border:none; color:#fff; font-weight:600; transition:background .2s; }
+    .btn-register:hover { background:var(--eco-dark); color:#fff; }
+
+    .strength-bar { height:5px; border-radius:3px; transition:all .3s; }
+    .req-item { font-size:.78rem; }
+    .req-ok { color:#2e7d32; }
+    .req-fail { color:#aaa; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="brand">
+    <div style="font-size:1.6rem;margin-bottom:6px;">🌿</div>
+    <h5>Eco Green Energy<br/>Solution (Pvt) Ltd</h5>
+    <small>Admin Panel</small>
+  </div>
+  <nav class="mt-2">
+    <a href="/admin" class="nav-link"><span class="icon">📊</span> Dashboard</a>
+    <a href="/admin/register" class="nav-link active"><span class="icon">➕</span> Register Admin</a>
+    <a href="/admin/manage-admins" class="nav-link"><span class="icon">👥</span> Manage Admins</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div style="color:#a5d6a7;font-size:.78rem;margin-bottom:8px;">
+      Logged in as <strong style="color:#fff;"><%= adminUser %></strong>
+      <span class="badge ms-1" style="background:rgba(255,255,255,.15);font-size:.7rem;"><%= adminRole %></span>
+    </div>
+    <a href="/" class="btn btn-sm btn-outline-light w-100 mb-2" style="opacity:.75;">🌐 Back to Website</a>
+    <a href="/admin/logout" class="btn btn-sm btn-outline-light w-100">🚪 Logout</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+  <div class="topbar">
+    <span class="page-title">➕ Register New Admin</span>
+    <span class="admin-badge">👤 <%= adminUser %></span>
+  </div>
+
+  <div class="p-4" style="max-width:640px;">
+
+    <% if (error) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <% if (success) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success:</strong> <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <div class="card form-card">
+      <div class="card-header">
+        🔐 Create New Admin Account
+      </div>
+      <div class="card-body p-4">
+        <form action="/admin/register" method="POST" id="registerForm" novalidate>
+
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="username" class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
+            <input type="text" id="username" name="username" class="form-control"
+              placeholder="e.g. john_admin" minlength="3" maxlength="80" required autocomplete="off" />
+            <div class="form-text">3–80 characters. Letters, numbers, and underscores recommended.</div>
+          </div>
+
+          <!-- Role -->
+          <div class="mb-3">
+            <label for="role" class="form-label fw-semibold">Role <span class="text-danger">*</span></label>
+            <select id="role" name="role" class="form-select" required>
+              <option value="admin" selected>Admin</option>
+              <option value="superadmin">Super Admin</option>
+            </select>
+            <div class="form-text">
+              <strong>Admin</strong> — can view the dashboard.
+              <strong>Super Admin</strong> — can also register and delete other admins.
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-2">
+            <label for="password" class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
+            <input type="password" id="password" name="password" class="form-control"
+              placeholder="Min. 8 characters" minlength="8" required autocomplete="new-password"
+              oninput="checkStrength(this.value)" />
+          </div>
+
+          <!-- Strength bar -->
+          <div class="mb-1">
+            <div class="strength-bar w-100 bg-light border" style="height:6px;border-radius:3px;">
+              <div id="strengthBar" class="strength-bar" style="width:0%;background:#ccc;"></div>
+            </div>
+          </div>
+          <!-- Requirements -->
+          <div class="mb-3 d-flex flex-wrap gap-2">
+            <span id="req-len"  class="req-item req-fail">✗ 8+ chars</span>
+            <span id="req-upper" class="req-item req-fail">✗ Uppercase</span>
+            <span id="req-num"  class="req-item req-fail">✗ Number</span>
+            <span id="req-sym"  class="req-item req-fail">✗ Symbol</span>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="mb-4">
+            <label for="confirm_password" class="form-label fw-semibold">Confirm Password <span class="text-danger">*</span></label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+              placeholder="Re-enter password" required autocomplete="new-password"
+              oninput="checkMatch()" />
+            <div id="matchMsg" class="form-text"></div>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-register px-4" id="submitBtn">
+              ➕ Register Admin
+            </button>
+            <a href="/admin/manage-admins" class="btn btn-outline-secondary px-4">Cancel</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /main-content -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function checkStrength(val) {
+    const bar   = document.getElementById('strengthBar');
+    const rLen  = document.getElementById('req-len');
+    const rUp   = document.getElementById('req-upper');
+    const rNum  = document.getElementById('req-num');
+    const rSym  = document.getElementById('req-sym');
+
+    const hasLen   = val.length >= 8;
+    const hasUpper = /[A-Z]/.test(val);
+    const hasNum   = /[0-9]/.test(val);
+    const hasSym   = /[^A-Za-z0-9]/.test(val);
+
+    const setReq = (el, ok) => {
+      el.textContent = (ok ? '✓' : '✗') + el.textContent.slice(1);
+      el.className   = 'req-item ' + (ok ? 'req-ok' : 'req-fail');
+    };
+    setReq(rLen,  hasLen);
+    setReq(rUp,   hasUpper);
+    setReq(rNum,  hasNum);
+    setReq(rSym,  hasSym);
+
+    const score = [hasLen, hasUpper, hasNum, hasSym].filter(Boolean).length;
+    const colors = ['#ef5350','#ef5350','#ffa726','#66bb6a','#2e7d32'];
+    const widths = ['0%','25%','50%','75%','100%'];
+    bar.style.width      = widths[score];
+    bar.style.background = colors[score];
+  }
+
+  function checkMatch() {
+    const pw  = document.getElementById('password').value;
+    const cpw = document.getElementById('confirm_password').value;
+    const msg = document.getElementById('matchMsg');
+    if (!cpw) { msg.textContent = ''; return; }
+    if (pw === cpw) {
+      msg.textContent = '✓ Passwords match';
+      msg.style.color = '#2e7d32';
+    } else {
+      msg.textContent = '✗ Passwords do not match';
+      msg.style.color = '#e53935';
+    }
+  }
+
+  // Client-side guard before submit
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const pw  = document.getElementById('password').value;
+    const cpw = document.getElementById('confirm_password').value;
+    if (pw !== cpw) {
+      e.preventDefault();
+      document.getElementById('matchMsg').textContent = '✗ Passwords do not match';
+      document.getElementById('matchMsg').style.color = '#e53935';
+    }
+  });
+</script>
+</body>
+</html>

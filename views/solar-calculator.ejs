@@ -1,0 +1,252 @@
+<%- include('partials/header', { 
+    title: 'ECO GREEN ENERGY SOLUTION (PVT) LTD - Solar Savings Calculator',
+    extraStyles: ['css/solar-calculator.css']
+}) %>
+
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+
+    <!-- Page Hero -->
+    <section class="section-dark relative" style="padding: 140px 0 80px; background: var(--bg-dark-1);">
+        <div class="container relative z-1">
+            <div class="row justify-content-center text-center text-light">
+                <div class="col-lg-7">
+                    <div class="subtitle id-color wow fadeInUp mb-3">Free Savings Estimator</div>
+                    <h1 class="wow fadeInUp" data-wow-delay=".2s">Solar Savings <span class="op-3">Calculator</span></h1>
+                    <p class="lead wow fadeInUp" data-wow-delay=".4s">Find out how much you could save by switching to solar. Enter your monthly electricity bill and get an instant estimate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="bg-light" id="calculator-section">
+        <div class="container">
+            <div class="calc-grid">
+
+                <!-- ===== LEFT COLUMN: INPUTS ===== -->
+                <div class="calc-card wow fadeInLeft">
+                    <div class="calc-card-header">
+                        <div class="calc-icon-wrap">
+                            <i class="icofont-calculator"></i>
+                        </div>
+                        <div>
+                            <p class="calc-eyebrow">Step 1 of 1</p>
+                            <h3 class="calc-card-title">Calculate Your Savings</h3>
+                        </div>
+                    </div>
+
+                    <div class="calc-form-body">
+
+                        <!-- Monthly Bill -->
+                        <div class="calc-field-group">
+                            <label class="calc-label" for="calc-bill">
+                                Average Monthly Electricity Bill
+                                <span class="calc-tooltip-wrap">
+                                    <i class="icofont-question-circle"></i>
+                                    <span class="calc-tooltip-text">Check your CEB or LECO bill. Enter the total amount you pay per month.</span>
+                                </span>
+                            </label>
+                            <div class="calc-input-prefix">
+                                <span class="calc-prefix-text">LKR</span>
+                                <input
+                                    type="number"
+                                    id="calc-bill"
+                                    class="calc-input"
+                                    placeholder="e.g. 8,500"
+                                    min="4860"
+                                    step="100"
+                                    aria-describedby="calc-bill-hint"
+                                />
+                            </div>
+                            <p class="calc-hint" id="calc-bill-hint">Minimum bill: LKR 4,860 (equivalent to ~30 units/month)</p>
+                        </div>
+
+                        <!-- Phase -->
+                        <div class="calc-field-group">
+                            <label class="calc-label" for="calc-phase">Phase</label>
+                            <div class="calc-select-wrap">
+                                <select id="calc-phase" class="calc-select">
+                                    <option value="">Select Phase</option>
+                                    <option value="single">Single Phase</option>
+                                    <option value="three">Three Phase</option>
+                                </select>
+                                <i class="icofont-simple-down calc-select-icon"></i>
+                            </div>
+                            <p class="calc-hint">Single phase: typical homes. Three phase: larger homes &amp; commercial.</p>
+                        </div>
+
+                        <!-- Bank -->
+                        <div class="calc-field-group">
+                            <label class="calc-label" for="calc-bank">Preferred Bank for Solar Loan</label>
+                            <div class="calc-select-wrap">
+                                <select id="calc-bank" class="calc-select">
+                                    <option value="">Select Bank</option>
+                                    <option value="boc">BOC</option>
+                                    <option value="commercial">Commercial Bank</option>
+                                    <option value="hnb">HNB</option>
+                                    <option value="sampath">Sampath Bank</option>
+                                </select>
+                                <i class="icofont-simple-down calc-select-icon"></i>
+                            </div>
+                            <p class="calc-hint">We handle the loan application process directly with your bank.</p>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="calc-error" class="calc-error-msg" role="alert" aria-live="polite"></div>
+
+                        <!-- Submit Button -->
+                        <button id="calc-btn" class="btn-main calc-btn-full" type="button">
+                            <i class="icofont-sun-alt me-2"></i>
+                            Calculate Savings
+                        </button>
+
+                        <p class="calc-disclaimer">* Results are estimates based on average Sri Lankan solar irradiance and CEB/LECO tariff data. Contact us for a precise site assessment.</p>
+
+                    </div>
+                </div>
+
+                <!-- ===== RIGHT COLUMN: RESULTS ===== -->
+                <div class="calc-card wow fadeInRight" id="results-card">
+
+                    <!-- Default / Empty State -->
+                    <div id="calc-empty-state" class="calc-empty-state">
+                        <div class="calc-empty-icon">
+                            <i class="icofont-sun-alt"></i>
+                        </div>
+                        <h4>Your Solar Savings Summary</h4>
+                        <p>Fill in the form on the left and click <strong>Calculate Savings</strong> to see your personalised results.</p>
+                        <div class="calc-empty-bullets">
+                            <div class="calc-empty-bullet">
+                                <i class="icofont-check-circled id-color"></i>
+                                Recommended system size
+                            </div>
+                            <div class="calc-empty-bullet">
+                                <i class="icofont-check-circled id-color"></i>
+                                Estimated monthly savings
+                            </div>
+                            <div class="calc-empty-bullet">
+                                <i class="icofont-check-circled id-color"></i>
+                                Estimated payback period
+                            </div>
+                            <div class="calc-empty-bullet">
+                                <i class="icofont-check-circled id-color"></i>
+                                Bank loan instalment estimate
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results State (hidden by default) -->
+                    <div id="calc-results" class="calc-results-state" aria-live="polite">
+
+                        <div class="calc-results-header">
+                            <div class="calc-results-icon">
+                                <i class="icofont-sun-alt"></i>
+                            </div>
+                            <div>
+                                <p class="calc-eyebrow">Your Estimate</p>
+                                <h3 class="calc-card-title">Solar Savings Summary</h3>
+                            </div>
+                        </div>
+
+                        <!-- Stat Cards -->
+                        <div class="calc-stats-grid">
+                            <div class="calc-stat-card calc-stat-primary">
+                                <p class="calc-stat-label">Recommended System</p>
+                                <p class="calc-stat-value" id="res-system-size">—</p>
+                                <p class="calc-stat-sub" id="res-system-panels">—</p>
+                            </div>
+                            <div class="calc-stat-card">
+                                <p class="calc-stat-label">Monthly Savings</p>
+                                <p class="calc-stat-value" id="res-monthly-savings">—</p>
+                                <p class="calc-stat-sub">Estimated LKR saved</p>
+                            </div>
+                            <div class="calc-stat-card">
+                                <p class="calc-stat-label">Payback Period</p>
+                                <p class="calc-stat-value" id="res-payback">—</p>
+                                <p class="calc-stat-sub">Years to break even</p>
+                            </div>
+                            <div class="calc-stat-card">
+                                <p class="calc-stat-label">Loan Instalment</p>
+                                <p class="calc-stat-value" id="res-loan">—</p>
+                                <p class="calc-stat-sub" id="res-loan-sub">Approx. monthly EMI</p>
+                            </div>
+                        </div>
+
+                        <!-- Savings Bar -->
+                        <div class="calc-savings-bar-wrap">
+                            <div class="calc-bar-labels">
+                                <span>Current Bill</span>
+                                <span>After Solar</span>
+                            </div>
+                            <div class="calc-bar-track">
+                                <div class="calc-bar-fill" id="res-savings-bar"></div>
+                            </div>
+                            <div class="calc-bar-values">
+                                <span id="res-bar-current">LKR —</span>
+                                <span id="res-bar-after" class="id-color fw-600">LKR —</span>
+                            </div>
+                        </div>
+
+                        <!-- Annual Savings Highlight -->
+                        <div class="calc-annual-box">
+                            <div>
+                                <p class="calc-stat-label mb-0">Estimated Annual Savings</p>
+                                <p class="calc-annual-value" id="res-annual-savings">LKR —</p>
+                            </div>
+                            <div class="calc-annual-icon">
+                                <i class="icofont-leaf"></i>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <a href="/get-a-quote" class="btn-main calc-btn-full d-block text-center mt-4">
+                            <i class="icofont-paper-plane me-2"></i>
+                            Get a Free Site Assessment
+                        </a>
+
+                        <button id="calc-reset-btn" class="calc-reset-btn" type="button">
+                            <i class="icofont-refresh me-1"></i> Recalculate
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <section class="border-top" style="padding: 60px 0;">
+        <div class="container">
+            <div class="row g-4 justify-content-center text-center">
+                <div class="col-lg-10">
+                    <div class="calc-trust-strip">
+                        <div class="calc-trust-item wow fadeInUp">
+                            <i class="icofont-check-circled id-color fs-30 d-block mb-2"></i>
+                            <strong>No Commitment</strong>
+                            <p class="mb-0">Free estimate, no strings attached.</p>
+                        </div>
+                        <div class="calc-trust-divider"></div>
+                        <div class="calc-trust-item wow fadeInUp" data-wow-delay=".2s">
+                            <i class="icofont-bank id-color fs-30 d-block mb-2"></i>
+                            <strong>Bank Loan Assistance</strong>
+                            <p class="mb-0">We handle paperwork with BOC, HNB, Commercial &amp; Sampath.</p>
+                        </div>
+                        <div class="calc-trust-divider"></div>
+                        <div class="calc-trust-item wow fadeInUp" data-wow-delay=".4s">
+                            <i class="icofont-star id-color fs-30 d-block mb-2"></i>
+                            <strong>96+ Projects Done</strong>
+                            <p class="mb-0">Trusted by Sri Lankan homeowners &amp; businesses since 2015.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<%- include('partials/footer', { 
+    extraScripts: ['js/solar-calculator.js']
+}) %>

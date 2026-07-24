@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= typeof title !== 'undefined' ? title : 'Eco Green Energy Solutions Pvt Ltd' %></title> <!--[cite: 1] -->
+    <link rel="icon" href="images/icon.webp" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
+    <meta content="Eco Green Energy Solutions Pvt Ltd - Ecology & Solar Energy" name="description" > <!--[cite: 1] -->
+    <meta content="solar energy, eco green, solar panels, renewable energy" name="keywords" >
+    <meta content="Eco Green Energy Solutions Pvt Ltd" name="author" > <!--[cite: 1] -->
+    
+    <!-- CSS Files
+    ================================================== -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/plugins.css" rel="stylesheet" type="text/css" >
+    <% if (typeof extraStyles !== 'undefined') { %>
+        <% extraStyles.forEach(function(style) { %>
+            <link href="<%= style %>" rel="stylesheet" type="text/css" >
+        <% }); %>
+    <% } %>
+    <link href="css/style.css" rel="stylesheet" type="text/css" >
+    <!-- color scheme -->
+    <link id="colors" href="css/colors/scheme-1.css" rel="stylesheet" type="text/css" >
+</head>
+
+<body>
+    <div id="wrapper">
+        <a href="#" id="back-to-top"></a>
+
+        <!-- preloader begin -->
+        <div id="de-loader"></div>
+        <!-- preloader end -->
+
+        <!-- header begin -->
+        <header class="transparent">
+            <div id="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-between xs-hide">
+                                <div class="d-flex">
+                                    <div class="topbar-widget me-5"><a href="#"><i class="icofont-location-pin"></i>#394B, High Level Road, Pannipitiya</a></div> <!--[cite: 1] -->
+                                    <div class="topbar-widget me-5"><a href="#"><i class="icofont-phone"></i>+94 7X XXX XXXX</a></div>
+                                    <div class="topbar-widget me-5"><a href="#"><i class="icofont-envelope"></i>info@ecogreensolar.lk</a></div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                                        <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                        <a href="#"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                        <a href="#"><i class="fa-brands fa-pinterest fa-lg"></i></a>
+                                        <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="de-flex sm-pt10">
+                            <div class="de-flex-col">
+                                <!-- logo begin -->
+                                <div id="logo">
+                                    <a href="/">
+                                        <img class="logo-main" src="images/logo-white.png" alt="" >
+                                        <img class="logo-mobile" src="images/logo-white.png" alt="" >
+                                    </a>
+                                </div>
+                                <!-- logo end -->
+                            </div>
+                            <div class="de-flex-col header-col-mid">
+                                <!-- mainmenu begin -->
+                                <ul id="mainmenu">
+                                    <li><a class="menu-item" href="/">Home</a></li>
+                                    <li><a class="menu-item" href="/services">Services</a></li>
+                                    <li><a class="menu-item" href="/projects">Projects</a></li>
+                                    <li><a class="menu-item" href="/about">About Us</a></li>
+                                    <li><a class="menu-item" href="/contact">Contact</a></li>
+                                </ul>
+                                <!-- mainmenu end -->
+                            </div>
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">
+                                    <a href="/get-a-quote" class="btn-main btn-line fx-slide hover-white"><span>Get a Quote</span></a>
+                                    <!-- Admin login shortcut -->
+                                    <a href="/admin/login"
+                                       title="Admin Login"
+                                       style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);text-decoration:none;margin-left:10px;font-size:15px;transition:background .2s,color .2s;"
+                                       onmouseover="this.style.background='rgba(255,255,255,0.25)';this.style.color='#fff';"
+                                       onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.7)';">
+                                       <i class="icofont-ui-lock"></i>
+                                    </a>
+                                    <span id="menu-btn"></span>
+                                </div>
+
+                                <div id="btn-extra">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header end -->
