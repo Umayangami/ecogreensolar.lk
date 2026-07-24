@@ -42,6 +42,12 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ── Routes ────────────────────────────────────────────────────────
+
+// Health check – visit /health to confirm server is working
+app.get('/health', function(req, res) {
+  res.send('<h1 style="color:green">✅ Server is running!</h1><p>Node.js app is working correctly on Hostinger.</p><a href="/">Go to Home</a>');
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(['/contact', '/contact.html'], contactRouter);
