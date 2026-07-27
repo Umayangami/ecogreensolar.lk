@@ -3,7 +3,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get(['/', '/index.html'], function(req, res, next) {
-  res.render('index', { title: 'ECO GREEN ENERGY SOLUTION (PVT) LTD - Home' });
+  res.render('index', { title: 'ECO GREEN ENERGY SOLUTION (PVT) LTD - Home' }, function(err, html) {
+    if (err) {
+      console.error('EJS Render Error on / :', err);
+      return res.status(500).send('<h2>EJS Error:</h2><p>' + err.message + '</p>');
+    }
+    res.send(html);
+  });
+});
+
+router.get('/ping', function(req, res) {
+  res.send('Router is working!');
 });
 
 /* GET services page. */
