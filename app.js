@@ -7,6 +7,7 @@ var path          = require('path');
 var cookieParser  = require('cookie-parser');
 var logger        = require('morgan');
 var session       = require('express-session');
+var MySQLStore    = require('express-mysql-session')(session);
 
 var indexRouter   = require('./routes/index');
 var usersRouter   = require('./routes/users');
@@ -26,15 +27,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ── Session (in-memory – works on every host, no filesystem/DB needed)
+// ── Session store ──────────────────────────────────────────────────
+const dbOptions = {
+  host: process.env.DB_HOST || 'localhost',
+  port: Number(process.env.DB_PORT) || 3306,
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'eco_energy_solution_db'
+};
+
 app.use(session({
-  secret:            process.env.SESSION_SECRET || 'ecogreen_fallback_secret',
-  resave:            false,
+  secret: process.env.SESSION_SECRET || 'ecogreen_fallback_secret',
+  store: new MySQLStore(dbOptions),
+  resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure:   false,   // Hostinger handles HTTPS termination itself
-    maxAge:   1000 * 60 * 60 * 2   // 2 hours
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 2 // 2 hours
   }
 }));
 
