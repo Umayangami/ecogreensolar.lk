@@ -27,6 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// ── Incoming request debug (Hostinger diagnostics)
+app.use(function (req, res, next) {
+  console.log('REQ', req.method, req.url);
+  next();
+});
+
 // ── Session store ──────────────────────────────────────────────────
 const dbOptions = {
   host: process.env.DB_HOST || 'localhost',
@@ -58,6 +64,11 @@ app.get('/health', function(req, res) {
   res.send('<h1 style="color:green">✅ Server is running!</h1><p>Node.js app is working correctly on Hostinger.</p><a href="/">Go to Home</a>');
 });
 
+// Optional favicon route to avoid 404 fallback HTML
+app.get('/favicon.ico', function(req, res) {
+  res.status(204).end();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(['/contact', '/contact.html'], contactRouter);
@@ -73,6 +84,11 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   var status  = err.status || err.statusCode || 500;
   var message = err.message || 'Internal Server Error';
+  console.error('Express error:', {
+    status: status,
+    message: message,
+    stack: err.stack
+  });
   res.status(status);
   // Send plain HTML so a broken error.ejs never causes a secondary crash
   res.send(
@@ -83,7 +99,13 @@ app.use(function (err, req, res, next) {
 });
 
 // Start directly from app.js for Hostinger compatibility
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || process.env.HOSTINGER_PORT || process.env.PASSENGER_PORT || 3000;
+app.set('port', PORT);
+console.log('Node startup env:', {
+  PORT: process.env.PORT,
+  HOSTINGER_PORT: process.env.HOSTINGER_PORT,
+  PASSENGER_PORT: process.env.PASSENGER_PORT
+});
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
