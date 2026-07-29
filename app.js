@@ -30,7 +30,8 @@ function createApp() {
 
   // ── Incoming request debug (Hostinger diagnostics)
   app.use(function (req, res, next) {
-    console.log('REQ', req.method, req.url);
+    console.log('[MIDDLEWARE] REQ', req.method, req.url);
+    console.log('[MIDDLEWARE] Path:', req.path);
     next();
   });
 
