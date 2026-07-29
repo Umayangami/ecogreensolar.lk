@@ -15,138 +15,269 @@ var contactRouter = require('./routes/contactRoutes');
 var quoteRouter   = require('./routes/quoteRoutes');
 var adminRouter   = require('./routes/adminRoutes');
 
+
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION:', err);
+});
+
+
 function createApp() {
+
   var app = express();
+
 
   // ── View engine ───────────────────────────────────────────────────
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'ejs');
 
-  // ── Request middleware ────────────────────────────────────────────
+
+  // ── Basic middleware ─────────────────────────────────────────────
   app.use(logger('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
 
-  // ── Incoming request debug (Hostinger diagnostics)
+
+  // ── Debug middleware ─────────────────────────────────────────────
   app.use(function (req, res, next) {
-    console.log('[MIDDLEWARE] REQ', req.method, req.url);
-    console.log('[MIDDLEWARE] Path:', req.path);
+
+    console.log('[REQUEST]', req.method, req.url);
+
     next();
+
   });
 
-  // ── Session store ──────────────────────────────────────────────────
+
+  // ── HEALTH CHECK BEFORE SESSION ──────────────────────────────────
+  app.get('/health', function(req, res) {
+
+    console.log('[HEALTH] OK');
+
+    res.status(200).send(
+      '<h1 style="color:green">✅ Node.js Server Working</h1>' +
+      '<p>Hostinger Node application is responding correctly.</p>'
+    );
+
+  });
+
+
+  // ── Session store ────────────────────────────────────────────────
+
   const dbOptions = {
+
     host: process.env.DB_HOST || 'localhost',
+
     port: Number(process.env.DB_PORT) || 3306,
+
     user: process.env.DB_USER || 'root',
+
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'eco_energy_solution_db'
+
+    database: process.env.DB_NAME || 'eco_energy_solution_db',
+
+    connectTimeout: 10000
+
   };
 
-  let sessionStore = null;
+
+  console.log('[DATABASE CONFIG]', {
+
+    host: dbOptions.host,
+
+    database: dbOptions.database,
+
+    user: dbOptions.user
+
+  });
+
+
+  let sessionStore;
+
+
   try {
+
     sessionStore = new MySQLStore(dbOptions);
-  } catch (err) {
-    console.warn('MySQL session store setup failed, falling back to memory store:', err.message);
+
+
+    sessionStore.on('error', function(err){
+
+      console.error('[MYSQL SESSION ERROR]', err);
+
+    });
+
+
+    console.log('[SESSION] MySQL session store initialized');
+
+
+  } catch(err) {
+
+    console.error('[SESSION] Failed, using memory session:', err.message);
+
   }
 
+
+
   app.use(session({
+
     secret: process.env.SESSION_SECRET || 'ecogreen_fallback_secret',
-    store: sessionStore || undefined,
+
+    store: sessionStore,
+
     resave: false,
+
     saveUninitialized: false,
+
     cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 1000 * 60 * 60 * 2 // 2 hours
+
+      httpOnly:true,
+
+      secure:false,
+
+      maxAge:1000 * 60 * 60 * 2
+
     }
+
   }));
 
-  // ── Static files ──────────────────────────────────────────────────
+
+
+  // ── Static files ─────────────────────────────────────────────────
+
   app.use(express.static(path.join(__dirname, 'public')));
 
-  // ── Routes ────────────────────────────────────────────────────────
 
-  // Health check – visit /health to confirm server is working
-  app.get('/health', function(req, res) {
-    res.send('<h1 style="color:green">✅ Server is running!</h1><p>Node.js app is working correctly on Hostinger.</p><a href="/">Go to Home</a>');
-  });
 
-  // Optional favicon route to avoid 404 fallback HTML
-  app.get('/favicon.ico', function(req, res) {
+  // ── Routes ───────────────────────────────────────────────────────
+
+  app.get('/favicon.ico', function(req,res){
+
     res.status(204).end();
+
   });
+
 
   app.use('/', indexRouter);
+
   app.use('/users', usersRouter);
-  app.use(['/contact', '/contact.html'], contactRouter);
-  app.use(['/get-a-quote', '/get-a-quote.html', '/book-service', '/book-service.html', '/booking.php'], quoteRouter);
+
+  app.use(['/contact','/contact.html'], contactRouter);
+
+  app.use([
+    '/get-a-quote',
+    '/get-a-quote.html',
+    '/book-service',
+    '/book-service.html',
+    '/booking.php'
+  ], quoteRouter);
+
+
   app.use('/admin', adminRouter);
 
-  // ── 404 handler ───────────────────────────────────────────────────
-  app.use(function (req, res, next) {
+
+
+  // ── 404 ─────────────────────────────────────────────────────────
+
+  app.use(function(req,res,next){
+
     next(createError(404));
+
   });
 
-  // ── Error handler ─────────────────────────────────────────────────
-  app.use(function (err, req, res, next) {
-    var status  = err.status || err.statusCode || 500;
-    var message = err.message || 'Internal Server Error';
-    console.error('Express error:', {
-      status: status,
-      message: message,
+
+
+  // ── Error handler ────────────────────────────────────────────────
+
+  app.use(function(err,req,res,next){
+
+    console.error('EXPRESS ERROR:', {
+
+      status: err.status,
+
+      message: err.message,
+
       stack: err.stack
+
     });
-    res.status(status);
-    // Send plain HTML so a broken error.ejs never causes a secondary crash
-    res.send(
-      '<!DOCTYPE html><html><head><title>Error ' + status + '</title></head>' +
-      '<body><h1>' + status + ' – ' + message + '</h1>' +
-      '<p><a href="/">Go back to Home</a></p></body></html>'
-    );
+
+
+    res.status(err.status || 500);
+
+
+    res.send(`
+      <html>
+        <body>
+          <h1>Error ${err.status || 500}</h1>
+          <p>${err.message}</p>
+        </body>
+      </html>
+    `);
+
   });
+
 
   return app;
+
 }
 
-function startServer() {
+
+
+function startServer(){
+
   const app = createApp();
-  const PORT = process.env.PORT || process.env.HOSTINGER_PORT || process.env.PASSENGER_PORT || 3000;
-  app.set('port', PORT);
+
+
+  const PORT =
+    process.env.PORT ||
+    process.env.HOSTINGER_PORT ||
+    process.env.PASSENGER_PORT ||
+    3000;
+
+
   console.log('Node startup env:', {
-    PORT: process.env.PORT,
-    HOSTINGER_PORT: process.env.HOSTINGER_PORT,
-    PASSENGER_PORT: process.env.PASSENGER_PORT
+
+    PORT:process.env.PORT,
+
+    HOSTINGER_PORT:process.env.HOSTINGER_PORT,
+
+    PASSENGER_PORT:process.env.PASSENGER_PORT
+
   });
 
-  const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port ${PORT}`);
+
+
+  const server = app.listen(PORT,'0.0.0.0',()=>{
+
+    console.log(`Server running on port ${PORT}`);
+
   });
 
-  server.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-      console.error(`Port ${PORT} is already in use. Retrying on a fallback port...`);
-      const fallbackPort = Number(PORT) + 1;
-      const fallbackServer = app.listen(fallbackPort, '0.0.0.0', () => {
-        console.log(`Server is running on fallback port ${fallbackPort}`);
-      });
-      fallbackServer.on('error', (fallbackErr) => {
-        console.error('Fallback server startup failed:', fallbackErr);
-      });
-      return;
-    }
-    console.error('Server startup failed:', err);
+
+
+  server.on('error',(err)=>{
+
+    console.error('SERVER ERROR:',err);
+
   });
+
 
   return server;
+
 }
+
+
 
 module.exports = {
   createApp,
   startServer
 };
 
-if (require.main === module) {
+
+if(require.main === module){
+
   startServer();
+
 }
