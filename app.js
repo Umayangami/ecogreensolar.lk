@@ -118,9 +118,27 @@ function startServer() {
     HOSTINGER_PORT: process.env.HOSTINGER_PORT,
     PASSENGER_PORT: process.env.PASSENGER_PORT
   });
-  return app.listen(PORT, '0.0.0.0', () => {
+
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
   });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`Port ${PORT} is already in use. Retrying on a fallback port...`);
+      const fallbackPort = Number(PORT) + 1;
+      const fallbackServer = app.listen(fallbackPort, '0.0.0.0', () => {
+        console.log(`Server is running on fallback port ${fallbackPort}`);
+      });
+      fallbackServer.on('error', (fallbackErr) => {
+        console.error('Fallback server startup failed:', fallbackErr);
+      });
+      return;
+    }
+    console.error('Server startup failed:', err);
+  });
+
+  return server;
 }
 
 module.exports = {
