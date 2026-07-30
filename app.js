@@ -64,33 +64,6 @@ function createApp() {
 
   });
 
-  app.get('/status', async function(req, res) {
-    const db = require('./config/db');
-
-    try {
-      const [rows] = await db.query('SELECT 1 + 1 AS result');
-
-      res.json({
-        status: 'ok',
-        db: {
-          host: process.env.DB_HOST || process.env.HOSTINGER_DB_HOST || process.env.MYSQL_HOST || '127.0.0.1',
-          port: Number(process.env.DB_PORT || process.env.HOSTINGER_DB_PORT || process.env.MYSQL_PORT) || 3306,
-          user: process.env.DB_USER || process.env.HOSTINGER_DB_USER || process.env.MYSQL_USER || 'root',
-          database: process.env.DB_NAME || process.env.HOSTINGER_DB_NAME || process.env.MYSQL_DATABASE || 'eco_energy_solution_db',
-          passwordSet: !!(process.env.DB_PASSWORD || process.env.HOSTINGER_DB_PASSWORD || process.env.MYSQL_PASSWORD)
-        },
-        dbPing: rows[0]
-      });
-    } catch (err) {
-      console.error('[STATUS CHECK] DB connection failed', err);
-      res.status(500).json({
-        status: 'error',
-        message: 'DB connection failed',
-        error: err.message
-      });
-    }
-  });
-
 
   // ── Session store ────────────────────────────────────────────────
 
